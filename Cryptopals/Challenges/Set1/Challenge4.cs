@@ -22,7 +22,7 @@ namespace Cryptopals.Challenges.Set1
 
             foreach (var hexLine in hexLines)
             {
-                var crypto = new CryptoDataContext(hexLine);
+                var crypto = new CryptographyDataContext(hexLine);
                 crypto.GenerateBruteForceXor();
 
                 foreach (var kvp in crypto.BruteForcedXor)

@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using Cryptopals.Extensions;
 using Cryptopals.Utilities;
 
 namespace Cryptopals.Challenges.Set2
@@ -14,13 +15,10 @@ namespace Cryptopals.Challenges.Set2
 
         public override void Execute()
         {
-            var bytes = new List<byte>(StringUtilities.ConvertPlaintextToBytes(Key));
-            while (bytes.Count < 20)
-            {
-                bytes.Add(4);
-            }
+            var bytes = StringUtilities.ConvertPlaintextToBytes(Key);
+            bytes = bytes.PKCS7Padding(4, 20);
 
-            var result = Encoding.ASCII.GetString(bytes.ToArray());
+            var result = Encoding.ASCII.GetString(bytes);
             OutputResult(Answers.CHALLENGE_9, result);
         }
     }

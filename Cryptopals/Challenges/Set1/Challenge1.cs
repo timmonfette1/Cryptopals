@@ -13,7 +13,7 @@ namespace Cryptopals.Challenges.Set1
 
         public override void Execute()
         {
-            var crypto = new CryptoDataContext(Hex);
+            var crypto = new CryptographyDataContext(Hex);
             var result = Convert.ToBase64String(crypto.Bytes);
 
             OutputResult(Answers.CHALLENGE_1, result);

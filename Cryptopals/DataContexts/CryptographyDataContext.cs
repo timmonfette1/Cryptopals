@@ -3,7 +3,7 @@ using Cryptopals.Utilities;
 
 namespace Cryptopals.DataContexts
 {
-    public class CryptoDataContext
+    public class CryptographyDataContext
     {
         private readonly byte[] _bytes;
         private readonly string _bytesHex;
@@ -13,18 +13,18 @@ namespace Cryptopals.DataContexts
 
         private readonly IDictionary<string, string> _bruteForcedXor;
 
-        private CryptoDataContext()
+        private CryptographyDataContext()
         {
             _bruteForcedXor = new Dictionary<string, string>();
         }
 
-        public CryptoDataContext(string hex) : this()
+        public CryptographyDataContext(string hex) : this()
         {
             _bytes = StringUtilities.ConvertHexToBytes(hex);
             _bytesHex = hex;
         }
 
-        public CryptoDataContext(string hex, string key) : this()
+        public CryptographyDataContext(string hex, string key) : this()
         {
             _bytes = StringUtilities.ConvertHexToBytes(hex);
             _bytesHex = hex;
@@ -32,13 +32,13 @@ namespace Cryptopals.DataContexts
             _keyHex = key;
         }
 
-        public CryptoDataContext(byte[] bytes) : this()
+        public CryptographyDataContext(byte[] bytes) : this()
         {
             _bytes = bytes;
             _bytesHex = _bytes.ToHexString();
         }
 
-        public CryptoDataContext(byte[] bytes, byte[] key) : this()
+        public CryptographyDataContext(byte[] bytes, byte[] key) : this()
         {
             _bytes = bytes;
             _bytesHex = _bytes.ToHexString();
@@ -66,7 +66,7 @@ namespace Cryptopals.DataContexts
         }
 
         public byte[] Xor() => Xor(_key);
-        public byte[] Xor(CryptoDataContext value) => Xor(value.Bytes);
+        public byte[] Xor(CryptographyDataContext value) => Xor(value.Bytes);
         public byte[] Xor(byte[] value)
         {
             var result = new byte[_bytes.Length];
@@ -82,7 +82,7 @@ namespace Cryptopals.DataContexts
         {
             if (_bruteForcedXor.Count != 0)
             {
-                throw new Exception($"{nameof(GenerateBruteForceXor)} has already been execute. Create a new {nameof(CryptoDataContext)} to execute a different or new Brute Forced Xor.");
+                throw new Exception($"{nameof(GenerateBruteForceXor)} has already been execute. Create a new {nameof(CryptographyDataContext)} to execute a different or new Brute Forced Xor.");
             }
 
             foreach (var key in Enumerable.Range(0, 127))

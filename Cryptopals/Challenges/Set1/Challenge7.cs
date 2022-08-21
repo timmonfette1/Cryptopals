@@ -19,7 +19,7 @@ namespace Cryptopals.Challenges.Set1
             var data = fileUtils.ReadFileAsString();
 
             var aes = new AesDataContext(Convert.FromBase64String(data), StringUtilities.ConvertPlaintextToBytes(Key));
-            var result = aes.Decrypt();
+            var result = aes.DecryptECB();
 
             OutputResult(Answers.CHALLENGE_7, result);
         }

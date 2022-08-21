@@ -19,7 +19,7 @@ namespace Cryptopals.Challenges.Set1
             var inputBytes = StringUtilities.ConvertPlaintextToBytes(Input);
             var keyBytes = StringUtilities.ConvertPlaintextToBytes(Key);
 
-            var crypto = new CryptoDataContext(inputBytes, keyBytes);
+            var crypto = new CryptographyDataContext(inputBytes, keyBytes);
             crypto.ExpandKey();
             var result = crypto.Xor();
 

@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using Cryptopals.DataContexts;
+using Cryptopals.Extensions;
 using Cryptopals.Utilities;
 
 namespace Cryptopals.Challenges.Set1
@@ -20,7 +21,7 @@ namespace Cryptopals.Challenges.Set1
             var bytes = Convert.FromBase64String(data);
             var key = CreateKey(bytes);
 
-            var crypto = new CryptoDataContext(bytes, key);
+            var crypto = new CryptographyDataContext(bytes, key);
             crypto.ExpandKey();
             var output = crypto.Xor();
             var result = Encoding.ASCII.GetString(output);
@@ -32,15 +33,15 @@ namespace Cryptopals.Challenges.Set1
 
         private static byte[] CreateKey(byte[] data)
         {
-            var crypto = new CryptoDataContext(data);
+            var crypto = new CryptographyDataContext(data);
             var keysize = GetSmallestKeysize(crypto);
-            var blocks = CreateBlocks(data, keysize);
+            var blocks = data.SplitIntoBlocks(keysize);
             blocks = Transpose(blocks);
 
             var bruteForcedResults = blocks
                 .Select(block =>
                 {
-                    var crypto = new CryptoDataContext(block);
+                    var crypto = new CryptographyDataContext(block);
                     crypto.GenerateBruteForceXor();
                     return crypto.BruteForcedXor;
                 })
@@ -70,7 +71,7 @@ namespace Cryptopals.Challenges.Set1
             return StringUtilities.ConvertHexToBytes(key);
         }
 
-        private static int GetSmallestKeysize(CryptoDataContext crypto)
+        private static int GetSmallestKeysize(CryptographyDataContext crypto)
         {
             var smallestKeysize = 0;
             var smallestDistance = 0;
@@ -94,20 +95,6 @@ namespace Cryptopals.Challenges.Set1
             }
 
             return smallestKeysize;
-        }
-
-        private static byte[][] CreateBlocks(byte[] data, int keysize)
-        {
-            var chunked = 0;
-            var result = new List<byte[]>();
-            while (chunked < data.Length)
-            {
-                var chunk = data.Skip(chunked).Take(keysize).ToArray();
-                result.Add(chunk);
-                chunked += keysize;
-            }
-
-            return result.ToArray();
         }
 
         private static byte[][] Transpose(byte[][] data)

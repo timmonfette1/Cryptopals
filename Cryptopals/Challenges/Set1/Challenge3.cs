@@ -12,7 +12,7 @@ namespace Cryptopals.Challenges.Set1
 
         public override void Execute()
         {
-            var crypto = new CryptoDataContext(Hex);
+            var crypto = new CryptographyDataContext(Hex);
             crypto.GenerateBruteForceXor();
 
             var bestRating = 0.0;

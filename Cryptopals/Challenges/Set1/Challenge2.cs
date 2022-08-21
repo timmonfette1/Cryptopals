@@ -15,8 +15,8 @@ namespace Cryptopals.Challenges.Set1
 
         public override void Execute()
         {
-            var crypto1 = new CryptoDataContext(Hex1);
-            var crypto2 = new CryptoDataContext(Hex2);
+            var crypto1 = new CryptographyDataContext(Hex1);
+            var crypto2 = new CryptographyDataContext(Hex2);
 
             var result = crypto1.Xor(crypto2);
             OutputResult(Answers.CHALLENGE_2, result.ToHexString());
