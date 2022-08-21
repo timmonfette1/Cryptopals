@@ -1,6 +1,6 @@
 ﻿using Cryptopals.Challenges;
 
-var runner = new ChallengeRunner(1);
+var runner = new ChallengeRunner(2);
 
 runner.Execute();
 

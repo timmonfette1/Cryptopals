@@ -6,8 +6,8 @@ namespace Cryptopals.Challenges.Set1
 {
     public class Challenge5 : BaseChallenge
     {
-        private const string input = "Burning 'em, if you ain't quick and nimble\nI go crazy when I hear a cymbal";
-        private const string key = "ICE";
+        private const string Input = "Burning 'em, if you ain't quick and nimble\nI go crazy when I hear a cymbal";
+        private const string Key = "ICE";
 
         public Challenge5(int index) : base(index)
         {
@@ -16,8 +16,8 @@ namespace Cryptopals.Challenges.Set1
 
         public override void Execute()
         {
-            var inputBytes = StringUtilities.ConvertPlaintextToBytes(input);
-            var keyBytes = StringUtilities.ConvertPlaintextToBytes(key);
+            var inputBytes = StringUtilities.ConvertPlaintextToBytes(Input);
+            var keyBytes = StringUtilities.ConvertPlaintextToBytes(Key);
 
             var crypto = new CryptoDataContext(inputBytes, keyBytes);
             crypto.ExpandKey();

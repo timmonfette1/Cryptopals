@@ -5,6 +5,8 @@ namespace Cryptopals.Challenges.Set1
 {
     public class Challenge8 : BaseChallenge
     {
+        private const string FileName = "8.txt";
+
         public Challenge8(int index) : base(index)
         {
 
@@ -12,7 +14,7 @@ namespace Cryptopals.Challenges.Set1
 
         public override void Execute()
         {
-            var fileUtils = new ImportFileUtilities("8.txt");
+            var fileUtils = new ImportFileUtilities(FileName);
             var data = fileUtils.ReadFile();
 
             var result = string.Empty;
