@@ -23,9 +23,7 @@ namespace Cryptopals.Challenges.Set2
             var iv = Enumerable.Repeat((byte)0, Key.Length).ToArray();
 
             var aes = new AesDataContext(bytes, keyBytes);
-            var cbcDecrypted = aes.DecryptCBC_Manual(iv);
-
-            var result = Encoding.ASCII.GetString(cbcDecrypted);
+            var result = aes.DecryptCBC_Manual(iv);
 
             OutputResult(Answers.CHALLENGE_10, result);
         }
