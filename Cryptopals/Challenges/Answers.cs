@@ -13,6 +13,11 @@
         public const string CHALLENGE_9 = "YELLOW SUBMARINE\x04\x04\x04\x04";
         public const string CHALLENGE_10 = VanillaIce;
 
+        // Challenge 11 has no pre-defined answer.
+
+        public const string CHALLENGE_12 = "Rollin' in my 5.0\nWith my rag-top down so my hair can blow\nThe girlies on standby waving just to say hi\nDid you stop? No, I just drove by\n";
+        public const string CHALLENGE_13 = "uid=10&email=foo@email.com&role=admin";
+
         #region Private
 
         private const string VanillaIce = "I'm back and I'm ringin' the bell \n" +

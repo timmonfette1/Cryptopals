@@ -18,15 +18,12 @@
             return result.ToArray();
         }
 
-        public static byte[] PKCS7Padding(this byte[] source, byte value, int length)
+        public static byte[] PKCS7Padding(this byte[] source, int length)
         {
-            var bytes = new List<byte>(source);
-            while (bytes.Count < length)
-            {
-                bytes.Add(value);
-            }
-
-            return bytes.ToArray();
+            var mod = length - source.Length % length;
+            var padding = Enumerable.Repeat((byte)mod, mod).ToArray();
+            var result = source.Concat(padding).ToArray();
+            return result;
         }
 
         public static byte[] PKCS7Strip(this byte[] source)

@@ -1,5 +1,4 @@
-﻿using System.Text;
-using Cryptopals.DataContexts;
+﻿using Cryptopals.DataContexts;
 using Cryptopals.Utilities;
 
 namespace Cryptopals.Challenges.Set2
@@ -23,7 +22,7 @@ namespace Cryptopals.Challenges.Set2
             var iv = Enumerable.Repeat((byte)0, Key.Length).ToArray();
 
             var aes = new AesDataContext(bytes, keyBytes);
-            var result = aes.DecryptCBC_Manual(iv);
+            var result = aes.DecryptCBCManual(iv);
 
             OutputResult(Answers.CHALLENGE_10, result);
         }

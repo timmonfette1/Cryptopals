@@ -16,7 +16,7 @@ namespace Cryptopals.Challenges.Set2
         public override void Execute()
         {
             var bytes = StringUtilities.ConvertPlaintextToBytes(Key);
-            bytes = bytes.PKCS7Padding(4, 20);
+            bytes = bytes.PKCS7Padding(20);
 
             var result = Encoding.ASCII.GetString(bytes);
             OutputResult(Answers.CHALLENGE_9, result);

@@ -65,6 +65,29 @@ namespace Cryptopals.DataContexts
             return streamReader.ReadToEnd();
         }
 
+        public string DecryptECBManual()
+        {
+            var result = new byte[_bytes.Length];
+
+            using (var alg = Aes.Create())
+            {
+                alg.Mode = CipherMode.ECB;
+                alg.Key = _key;
+                alg.Padding = PaddingMode.None;
+
+                using var dectyptor = alg.CreateDecryptor(alg.Key, null);
+
+                var index = 0;
+
+                while (index < _bytes.Length)
+                {
+                    index += dectyptor.TransformBlock(_bytes, index, alg.BlockSize / 8, result, index);
+                }
+            }
+
+            return Encoding.ASCII.GetString(result.PKCS7Strip());
+        }
+
         public byte[] EncryptCBC(byte[] iv)
         {
             var plainText = Encoding.ASCII.GetString(_bytes);
@@ -99,7 +122,7 @@ namespace Cryptopals.DataContexts
             return streamReader.ReadToEnd();
         }
 
-        public string DecryptCBC_Manual(byte[] iv)
+        public string DecryptCBCManual(byte[] iv)
         {
             var result = new byte[_bytes.Length];
 
