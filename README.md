@@ -8,7 +8,7 @@ Current status as of 08/28/2022: 13/66 Challenges Completed.
 
 ## Building and Executing
 
-To building the solution, simply clone the repository and open the solution in Visual Studio. There are no external requirements, just build the solution.
+To build the solution, simply clone the repository and open the solution in Visual Studio. There are no external requirements, just build the solution.
 
 To execute the challenges, you can use the `ChallengeRunner()` class. This class takes an optional integer parameter upon instantiation that will specify the "set" of challenges to load. Not specifying a set number will load every set available; all sets are loaded based on Namespace (`Cryptopals.Challenges.SetX`).
 
