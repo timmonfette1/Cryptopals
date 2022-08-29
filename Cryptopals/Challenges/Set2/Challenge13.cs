@@ -36,16 +36,16 @@ namespace Cryptopals.Challenges.Set2
             var adminCookie = ProfileFor(compromisedPayload);
             var (adminEncrypted, adminKey) = EncryptCookie(adminCookie, key);
 
-            var compromisedByes = new byte[initialCookie.Length - 16];
+            var compromisedByes = new byte[initialCookie.Length - key.Length];
 
-            for (int i = 0; i < 32; i++)
+            for (int i = 0; i < adminKey.Length * 2; i++)
             {
                 compromisedByes[i] = initialCookie[i];
             }
 
-            for (int i = 16; i < 32; i++)
+            for (int i = adminKey.Length; i < adminKey.Length * 2; i++)
             {
-                compromisedByes[i + 16] = adminEncrypted[i];
+                compromisedByes[i + adminKey.Length] = adminEncrypted[i];
             }
 
             return DecryptCookie(compromisedByes, adminKey);

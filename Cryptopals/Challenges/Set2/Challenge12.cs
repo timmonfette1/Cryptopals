@@ -53,7 +53,7 @@ namespace Cryptopals.Challenges.Set2
 
             for (var i = 2; i < 129 && blockLength == 0; i++)
             {
-                var input = new string('A', i);
+                var input = new string('X', i);
                 var encrypted = EncryptData(input);
 
                 if (encrypted.Length > initialLength)
