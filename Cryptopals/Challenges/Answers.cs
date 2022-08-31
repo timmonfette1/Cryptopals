@@ -15,8 +15,10 @@
 
         // Challenge 11 has no pre-defined answer.
 
-        public const string CHALLENGE_12 = "Rollin' in my 5.0\nWith my rag-top down so my hair can blow\nThe girlies on standby waving just to say hi\nDid you stop? No, I just drove by\n";
+        public const string CHALLENGE_12 = TwelveAndFourteen;
         public const string CHALLENGE_13 = "uid=10&email=foo@email.com&role=admin";
+        public const string CHALLENGE_14 = TwelveAndFourteen;
+        public const string CHALLENGE_15 = "ICE ICE BABY";
 
         #region Private
 
@@ -88,6 +90,8 @@
             "Play that funky music A little louder now \n" +
             "Play that funky music, white boy Come on, Come on, Come on \n" +
             "Play that funky music \n";
+
+        private const string TwelveAndFourteen = "Rollin' in my 5.0\nWith my rag-top down so my hair can blow\nThe girlies on standby waving just to say hi\nDid you stop? No, I just drove by\n";
 
         #endregion Private
     }

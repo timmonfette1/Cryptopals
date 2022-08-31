@@ -40,7 +40,7 @@
             }
             else
             {
-                throw new ArgumentException("Invalid byte array used as the source.", nameof(source));
+                throw new ArgumentException("The provided Byte Array does not use PKCS7 Padding.", nameof(source));
             }
         }
     }
