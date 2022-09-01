@@ -19,6 +19,7 @@
         public const string CHALLENGE_13 = "uid=10&email=foo@email.com&role=admin";
         public const string CHALLENGE_14 = TwelveAndFourteen;
         public const string CHALLENGE_15 = "ICE ICE BABY";
+        public const string CHALLENGE_16 = ";admin=true";
 
         #region Private
 
