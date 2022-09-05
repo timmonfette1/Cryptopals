@@ -4,7 +4,7 @@ This repository contains C# implementations of the [Cryptopals Challengs](https:
 
 ## Current Status
 
-Current status as of 08/31/2022: 16/66 Challenges Completed.
+Current status as of 09/05/2022: 19/66 Challenges Completed.
 
 ## Building and Executing
 

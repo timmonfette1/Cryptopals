@@ -20,6 +20,13 @@
         public const string CHALLENGE_14 = TwelveAndFourteen;
         public const string CHALLENGE_15 = "ICE ICE BABY";
         public const string CHALLENGE_16 = ";admin=true";
+        public const string CHALLENGE_17 = "";
+        public const string CHALLENGE_18 = "";
+        public const string CHALLENGE_19 = "";
+        public const string CHALLENGE_20 = "";
+        public const string CHALLENGE_21 = "2357136044";
+
+        // Challenge 22 has no pre-defined answer.
 
         #region Private
 

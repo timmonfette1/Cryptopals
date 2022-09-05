@@ -2,7 +2,7 @@
 {
     public abstract class BaseChallenge
     {
-        private readonly int _index;
+        protected readonly int _index;
 
         public BaseChallenge(int index)
         {
@@ -11,20 +11,20 @@
 
         public abstract void Execute();
 
-        protected void OutputResult(string answer, string result, bool skipAnswerPrint = true)
+        protected virtual void OutputResult(object answer, object result, bool skipAnswerPrint = true)
         {
             Console.WriteLine($"===== Challenge {_index} =====");
 
             if (!skipAnswerPrint)
             {
-                Console.WriteLine($"Answer: {answer.Trim()}");
-                Console.WriteLine($"Result: {result.Trim()}");
+                Console.WriteLine($"Answer: {answer.ToString().Trim()}");
+                Console.WriteLine($"Result: {result.ToString().Trim()}");
             }
 
-            Console.WriteLine($"Challenge Passed: {string.Equals(answer, result, StringComparison.OrdinalIgnoreCase)}");
+            Console.WriteLine($"Challenge Passed: {string.Equals(answer.ToString(), result.ToString(), StringComparison.OrdinalIgnoreCase)}");
         }
 
-        protected void OutputResult(string[] answers, string[] results, bool skipAnswerPrint = true)
+        protected virtual void OutputResult(object[] answers, object[] results, bool skipAnswerPrint = true)
         {
             if (answers.Length != results.Length)
             {
@@ -41,11 +41,11 @@
 
                 if (!skipAnswerPrint)
                 {
-                    Console.WriteLine($"Answer: {answer.Trim()}");
-                    Console.WriteLine($"Result: {result.Trim()}");
+                    Console.WriteLine($"Answer: {answer.ToString().Trim()}");
+                    Console.WriteLine($"Result: {result.ToString().Trim()}");
                 }
 
-                success = success && string.Equals(answer, result, StringComparison.OrdinalIgnoreCase);
+                success = success && string.Equals(answer.ToString(), result.ToString(), StringComparison.OrdinalIgnoreCase);
             }
 
             Console.WriteLine($"Challenge Passed: {success}");
