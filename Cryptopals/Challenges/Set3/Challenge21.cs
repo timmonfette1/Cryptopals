@@ -9,11 +9,11 @@ namespace Cryptopals.Challenges.Set3
 
         }
 
-        public override void Execute()
+        public override bool Execute()
         {
             var mt = new MersenneTwisterDataContext(0);
             var result = mt.GetRandomValue();
-            OutputResult(Answers.CHALLENGE_21, result);
+            return OutputResult(Answers.CHALLENGE_21, result);
         }
     }
 }

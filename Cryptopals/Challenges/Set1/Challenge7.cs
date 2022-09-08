@@ -5,23 +5,23 @@ namespace Cryptopals.Challenges.Set1
 {
     public class Challenge7 : BaseChallenge
     {
-        private const string FileName = "7.txt";
-        private const string Key = "YELLOW SUBMARINE";
+        private const string FILE_NAME = "7.txt";
+        private const string KEY = "YELLOW SUBMARINE";
 
         public Challenge7(int index) : base(index)
         {
 
         }
 
-        public override void Execute()
+        public override bool Execute()
         {
-            var fileUtils = new ImportFileUtilities(FileName);
+            var fileUtils = new ImportFileUtilities(FILE_NAME);
             var data = fileUtils.ReadFileAsString();
 
-            var aes = new AesDataContext(Convert.FromBase64String(data), StringUtilities.ConvertPlaintextToBytes(Key));
+            var aes = new AesDataContext(Convert.FromBase64String(data), StringUtilities.ConvertPlaintextToBytes(KEY));
             var result = aes.DecryptECB();
 
-            OutputResult(Answers.CHALLENGE_7, result);
+            return OutputResult(Answers.CHALLENGE_7, result);
         }
     }
 }

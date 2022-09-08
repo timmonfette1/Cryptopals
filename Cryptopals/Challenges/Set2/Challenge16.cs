@@ -6,24 +6,24 @@ namespace Cryptopals.Challenges.Set2
 {
     public class Challenge16 : BaseChallenge
     {
-        private const string Prepend = "comment1=cooking%20MCs;userdata=";
-        private const string Append = ";comment2=%20like%20a%20pound%20of%20bacon";
-        private const int BlockLength = 16;
+        private const string PREPEND = "comment1=cooking%20MCs;userdata=";
+        private const string APPEND = ";comment2=%20like%20a%20pound%20of%20bacon";
+        private const int BLOCK_LENGTH = 16;
 
-        private const string Input = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        private const string INPUT = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
 
         private readonly byte[] _key;
 
         public Challenge16(int index) : base(index)
         {
-            _key = RandomUtilities.GetRandomBytes(BlockLength);
+            _key = RandomUtilities.GetRandomBytes(BLOCK_LENGTH);
         }
 
-        public override void Execute()
+        public override bool Execute()
         {
-            var (encrypted, iv) = Encrypt(Input);
+            var (encrypted, iv) = Encrypt(INPUT);
 
-            var firstBlock = StringUtilities.ConvertPlaintextToBytes(Prepend[..BlockLength]);
+            var firstBlock = StringUtilities.ConvertPlaintextToBytes(PREPEND[..BLOCK_LENGTH]);
             var crypto = new CryptographyDataContext(firstBlock);
             var bitFlipped = crypto.Xor(iv);
 
@@ -40,7 +40,7 @@ namespace Cryptopals.Challenges.Set2
                 result = decrypted.Substring(index, Answers.CHALLENGE_16.Length);
             }
 
-            OutputResult(Answers.CHALLENGE_16, result);
+            return OutputResult(Answers.CHALLENGE_16, result);
         }
 
         #region Private Methods
@@ -48,8 +48,8 @@ namespace Cryptopals.Challenges.Set2
         private (byte[], byte[]) Encrypt(string input)
         {
             var sanitized = input.Replace(";", "_").Replace("=", "_");
-            var bytes = StringUtilities.ConvertPlaintextToBytes(Prepend + sanitized + Append).PKCS7Padding(BlockLength);
-            var iv = RandomUtilities.GetRandomBytes(BlockLength);
+            var bytes = StringUtilities.ConvertPlaintextToBytes(PREPEND + sanitized + APPEND).PKCS7Padding(BLOCK_LENGTH);
+            var iv = RandomUtilities.GetRandomBytes(BLOCK_LENGTH);
             var aes = new AesDataContext(bytes, _key);
             var result = aes.EncryptCBC(iv);
 

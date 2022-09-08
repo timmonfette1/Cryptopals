@@ -30,6 +30,8 @@
 
         // Challenge 22 has no pre-defined answer.
 
+        // Challenge 23 has no pre-defined answer.
+
         #region Private
 
         private const string VanillaIce = "I'm back and I'm ringin' the bell \n" +

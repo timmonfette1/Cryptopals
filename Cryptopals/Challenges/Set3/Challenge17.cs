@@ -7,22 +7,22 @@ namespace Cryptopals.Challenges.Set3
 {
     public class Challenge17 : BaseChallenge
     {
-        private const string FILENAME = "17.txt";
-        private const int SIZE = 16;
+        private const string FILE_NAME = "17.txt";
+        private const int BLOCK_SIZE = 16;
 
         private readonly byte[] _key;
         private readonly byte[] _iv;
 
         public Challenge17(int index) : base(index)
         {
-            _key = RandomUtilities.GetRandomBytes(SIZE);
-            _iv = RandomUtilities.GetRandomBytes(SIZE);
+            _key = RandomUtilities.GetRandomBytes(BLOCK_SIZE);
+            _iv = RandomUtilities.GetRandomBytes(BLOCK_SIZE);
         }
 
-        public override void Execute()
+        public override bool Execute()
         {
             var rand = RandomUtilities.GetRandomNumber(0, 10);
-            var fileUtils = new ImportFileUtilities(FILENAME);
+            var fileUtils = new ImportFileUtilities(FILE_NAME);
             var lines = fileUtils.ReadFile().Select(x => Encoding.ASCII.GetString(Convert.FromBase64String(x))).ToArray();
             var line = lines[rand];
 
@@ -32,9 +32,9 @@ namespace Cryptopals.Challenges.Set3
             var encryptedAndIv = _iv.Concat(encrypted).ToArray();
             BruteForce(encryptedAndIv);
 
-            var result = Encoding.ASCII.GetString(encryptedAndIv.Skip(SIZE).ToArray().PKCS7Strip());
+            var result = Encoding.ASCII.GetString(encryptedAndIv.Skip(BLOCK_SIZE).ToArray().PKCS7Strip());
 
-            OutputResult(line, result);
+            return OutputResult(line, result);
         }
 
         #region Private Methods
@@ -57,37 +57,24 @@ namespace Cryptopals.Challenges.Set3
             return decrypted.IsPKCS7Padded();
         }
 
-        private static byte[] GetInjectionPadding(byte[] bytes, int length)
-        {
-            var blockSize = bytes.Length - length;
-
-            var randomBytes = RandomUtilities.GetRandomBytes(blockSize);
-            var padding = Enumerable.Repeat((byte)(length - 1), length).ToArray();
-
-            var crypto = new CryptographyDataContext(padding);
-            var result = crypto.Xor(bytes[blockSize..]);
-
-            return randomBytes.Concat(result).ToArray();
-        }
-
-        private void XorBitByBit(byte[] input, byte[] output, int block, int bit)
+        private static void XorBitByBit(byte[] input, byte[] output, int block, int bit)
         {
             for (var i = 15; i > bit; i--)
             {
-                input[(block - 1) * SIZE + i] ^= (byte)(output[i] ^ (SIZE - bit));
+                input[(block - 1) * BLOCK_SIZE + i] ^= (byte)(output[i] ^ (BLOCK_SIZE - bit));
             }
         }
 
-        private void XorBit(byte[] input, int value, int block, int bit)
+        private static void XorBit(byte[] input, int value, int block, int bit)
         {
-            input[(block - 1) * SIZE + bit] ^= (byte)(value ^ (SIZE - bit));
+            input[(block - 1) * BLOCK_SIZE + bit] ^= (byte)(value ^ (BLOCK_SIZE - bit));
         }
 
         private void BruteForce(byte[] bytes)
         {
-            for (var block = bytes.Length / SIZE - 1; block >= 1; block--)
+            for (var block = bytes.Length / BLOCK_SIZE - 1; block >= 1; block--)
             {
-                var blockData = new byte[SIZE];
+                var blockData = new byte[BLOCK_SIZE];
                 for (var bit = 15; bit >= 0; bit--)
                 {
                     XorBitByBit(bytes, blockData, block, bit);
@@ -96,7 +83,7 @@ namespace Cryptopals.Challenges.Set3
                     {
                         XorBit(bytes, byteValue, block, bit);
 
-                        var toOracle = bytes.Take((block + 1) * SIZE).ToArray();
+                        var toOracle = bytes.Take((block + 1) * BLOCK_SIZE).ToArray();
                         if (CBCPaddingOracle(toOracle))
                         {
                             XorBit(bytes, byteValue, block, bit);
@@ -110,7 +97,7 @@ namespace Cryptopals.Challenges.Set3
                     XorBitByBit(bytes, blockData, block, bit);
                 }
 
-                Array.Copy(blockData, 0, bytes, block * SIZE, SIZE);
+                Array.Copy(blockData, 0, bytes, block * BLOCK_SIZE, BLOCK_SIZE);
             }
         }
 

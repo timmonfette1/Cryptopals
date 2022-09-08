@@ -7,16 +7,16 @@ namespace Cryptopals.Challenges.Set1
 {
     public class Challenge6 : BaseChallenge
     {
-        private const string FileName = "6.txt";
+        private const string FILE_NAME = "6.txt";
 
         public Challenge6(int index) : base(index)
         {
 
         }
 
-        public override void Execute()
+        public override bool Execute()
         {
-            var fileUtils = new ImportFileUtilities(FileName);
+            var fileUtils = new ImportFileUtilities(FILE_NAME);
             var data = fileUtils.ReadFileAsString();
             var bytes = Convert.FromBase64String(data);
             var key = CreateKey(bytes);
@@ -26,7 +26,7 @@ namespace Cryptopals.Challenges.Set1
             var output = crypto.Xor();
             var result = Encoding.ASCII.GetString(output);
 
-            OutputResult(Answers.CHALLENGE_6, result);
+            return OutputResult(Answers.CHALLENGE_6, result);
         }
 
         #region Private Methods

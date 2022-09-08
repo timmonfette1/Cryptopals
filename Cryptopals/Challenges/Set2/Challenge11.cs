@@ -7,7 +7,7 @@ namespace Cryptopals.Challenges.Set2
 {
     public class Challenge11 : BaseChallenge
     {
-        private const string Input = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        private const string INPUT = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
 
         private readonly IDictionary<EncryptionMethod, Func<byte[], byte[], byte[]>> EncryptionMapper;
 
@@ -22,12 +22,12 @@ namespace Cryptopals.Challenges.Set2
             };
         }
 
-        public override void Execute()
+        public override bool Execute()
         {
             var encrypted = RandomEncryption();
             var result = EncryptionOracle(encrypted);
 
-            OutputResult(Answer.ToString(), result.ToString());
+            return OutputResult(Answer.ToString(), result.ToString());
         }
 
         #region Private Methods
@@ -40,7 +40,7 @@ namespace Cryptopals.Challenges.Set2
             var rearPaddingSize = RandomUtilities.GetRandomNumber(5, 11);
             var rearPaddingBytes = RandomUtilities.GetRandomBytes(rearPaddingSize);
 
-            var bytes = StringUtilities.ConvertPlaintextToBytes(Input);
+            var bytes = StringUtilities.ConvertPlaintextToBytes(INPUT);
             bytes = frontPaddingBytes.Concat(bytes).Concat(rearPaddingBytes).ToArray().PKCS7Padding(16);
 
             var key = RandomUtilities.GetRandomBytes(16);

@@ -28,6 +28,7 @@ namespace Cryptopals.Challenges
             { 8, SET_8_NAMESPACE },
         };
 
+        private readonly IDictionary<bool, int> _resultSummary;
         private readonly IEnumerable<string> _namespaceFilter;
 
         public ChallengeRunner() : this(null)
@@ -55,6 +56,12 @@ namespace Cryptopals.Challenges
             {
                 _namespaceFilter = new string[1] { _setMapper[set.Value] };
             }
+
+            _resultSummary = new Dictionary<bool, int>()
+            {
+                { true, 0 },
+                { false, 0 }
+            };
         }
 
         public void Execute()
@@ -72,9 +79,15 @@ namespace Cryptopals.Challenges
             foreach (var type in query.OrderBy(x => x.ChallengeNumber))
             {
                 var instance = Activator.CreateInstance(type.Type, type.ChallengeNumber) as BaseChallenge;
-                instance.Execute();
+                var result = instance.Execute();
+                _resultSummary[result]++;
                 Console.WriteLine();
             }
+
+            Console.WriteLine("===== Summary =====");
+            Console.WriteLine($"Total Number of Successful Challenges: {_resultSummary[true]}");
+            Console.WriteLine($"Total Number of Failed Challenges: {_resultSummary[false]}");
+            Console.WriteLine($"Success Percentage: {Math.Round(_resultSummary[true] / (double)(_resultSummary[true] + _resultSummary[false]) * 100.00, 2)}%");
         }
     }
 }

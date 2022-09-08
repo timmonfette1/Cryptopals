@@ -6,20 +6,20 @@ namespace Cryptopals.Challenges.Set2
 {
     public class Challenge9 : BaseChallenge
     {
-        private const string Key = "YELLOW SUBMARINE";
+        private const string KEY = "YELLOW SUBMARINE";
 
         public Challenge9(int index) : base(index)
         {
 
         }
 
-        public override void Execute()
+        public override bool Execute()
         {
-            var bytes = StringUtilities.ConvertPlaintextToBytes(Key);
+            var bytes = StringUtilities.ConvertPlaintextToBytes(KEY);
             bytes = bytes.PKCS7Padding(20);
 
             var result = Encoding.ASCII.GetString(bytes);
-            OutputResult(Answers.CHALLENGE_9, result);
+            return OutputResult(Answers.CHALLENGE_9, result);
         }
     }
 }

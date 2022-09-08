@@ -9,9 +9,9 @@
             _index = index;
         }
 
-        public abstract void Execute();
+        public abstract bool Execute();
 
-        protected virtual void OutputResult(object answer, object result, bool skipAnswerPrint = true)
+        protected virtual bool OutputResult(object answer, object result, bool skipAnswerPrint = true)
         {
             Console.WriteLine($"===== Challenge {_index} =====");
 
@@ -21,10 +21,14 @@
                 Console.WriteLine($"Result: {result.ToString().Trim()}");
             }
 
-            Console.WriteLine($"Challenge Passed: {string.Equals(answer.ToString(), result.ToString(), StringComparison.OrdinalIgnoreCase)}");
+            var success = string.Equals(answer.ToString(), result.ToString(), StringComparison.OrdinalIgnoreCase);
+
+            Console.WriteLine($"Challenge Passed: {success}");
+
+            return success;
         }
 
-        protected virtual void OutputResult(object[] answers, object[] results, bool skipAnswerPrint = true)
+        protected virtual bool OutputResult(object[] answers, object[] results, bool skipAnswerPrint = true)
         {
             if (answers.Length != results.Length)
             {
@@ -49,6 +53,8 @@
             }
 
             Console.WriteLine($"Challenge Passed: {success}");
+
+            return success;
         }
     }
 }

@@ -4,15 +4,15 @@ namespace Cryptopals.Challenges.Set1
 {
     public class Challenge3 : BaseChallenge
     {
-        private const string Hex = "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736";
+        private const string HEX = "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736";
 
         public Challenge3(int index) : base(index)
         {
         }
 
-        public override void Execute()
+        public override bool Execute()
         {
-            var crypto = new CryptographyDataContext(Hex);
+            var crypto = new CryptographyDataContext(HEX);
             crypto.GenerateBruteForceXor();
 
             var bestRating = 0.0;
@@ -30,7 +30,7 @@ namespace Cryptopals.Challenges.Set1
                 }
             }
 
-            OutputResult(Answers.CHALLENGE_3, result);
+            return OutputResult(Answers.CHALLENGE_3, result);
         }
     }
 }

@@ -6,33 +6,33 @@ namespace Cryptopals.Challenges.Set2
 {
     public class Challenge13 : BaseChallenge
     {
-        private const long DefaultUid = 10;
-        private const string DefaultRole = "user";
-        private const string AdminRole = "admin";
+        private const long DEFAULT_UID = 10;
+        private const string DEFAULT_ROLE = "user";
+        private const string ADMIN_ROLE = "admin";
 
-        private const string Email = "foo@email.com";
+        private const string EMAIL = "foo@email.com";
 
         public Challenge13(int index) : base(index)
         {
 
         }
 
-        public override void Execute()
+        public override bool Execute()
         {
-            var cookie = ProfileFor(Email);
+            var cookie = ProfileFor(EMAIL);
             var (initialCookie, key) = EncryptCookie(cookie);
             var compromisedCookie = CompromiseCookie(initialCookie, key);
 
             var result = CookieUtilities.Encode(compromisedCookie);
 
-            OutputResult(Answers.CHALLENGE_13, result);
+            return OutputResult(Answers.CHALLENGE_13, result);
         }
 
         #region Private Methods
 
         private static CookieDataContext CompromiseCookie(byte[] initialCookie, byte[] key)
         {
-            var compromisedPayload = Email.Replace("@email.com", AdminRole) + "\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b";
+            var compromisedPayload = EMAIL.Replace("@email.com", ADMIN_ROLE) + "\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b";
             var adminCookie = ProfileFor(compromisedPayload);
             var (adminEncrypted, adminKey) = EncryptCookie(adminCookie, key);
 
@@ -55,9 +55,9 @@ namespace Cryptopals.Challenges.Set2
         {
             return new CookieDataContext()
             {
-                Uid = DefaultUid,
+                Uid = DEFAULT_UID,
                 Email = email,
-                Role = DefaultRole
+                Role = DEFAULT_ROLE
             };
         }
 

@@ -5,16 +5,16 @@ namespace Cryptopals.Challenges.Set1
 {
     public class Challenge8 : BaseChallenge
     {
-        private const string FileName = "8.txt";
+        private const string FILE_NAME = "8.txt";
 
         public Challenge8(int index) : base(index)
         {
 
         }
 
-        public override void Execute()
+        public override bool Execute()
         {
-            var fileUtils = new ImportFileUtilities(FileName);
+            var fileUtils = new ImportFileUtilities(FILE_NAME);
             var data = fileUtils.ReadFile();
 
             var result = string.Empty;
@@ -28,7 +28,7 @@ namespace Cryptopals.Challenges.Set1
                 }
             }
 
-            OutputResult(Answers.CHALLENGE_8, result);
+            return OutputResult(Answers.CHALLENGE_8, result);
         }
     }
 }

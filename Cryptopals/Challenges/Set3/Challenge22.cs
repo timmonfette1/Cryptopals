@@ -10,7 +10,7 @@ namespace Cryptopals.Challenges.Set3
 
         }
 
-        public override void Execute()
+        public override bool Execute()
         {
             var initialSeed = (uint)DateTimeOffset.Now.ToUnixTimeSeconds();
             var mt = new MersenneTwisterDataContext(initialSeed);
@@ -29,7 +29,7 @@ namespace Cryptopals.Challenges.Set3
                 seed--;
             }
 
-            OutputResult(initialSeed, seed);
+            return OutputResult(initialSeed, seed);
         }
     }
 }

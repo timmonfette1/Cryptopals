@@ -9,7 +9,7 @@ namespace Cryptopals.Challenges.Set3
 
         }
 
-        public override void Execute()
+        public override bool Execute()
         {
             var mt = new MersenneTwisterDataContext(0);
             var originalState = mt.State;
@@ -20,10 +20,10 @@ namespace Cryptopals.Challenges.Set3
                 clonedState[i] = Untemper(mt.GetRandomValue());
             }
 
-            OutputResult(originalState, clonedState);
+            return OutputResult(originalState, clonedState);
         }
 
-        protected override void OutputResult(object answer, object result, bool skipAnswerPrint = true)
+        protected override bool OutputResult(object answer, object result, bool skipAnswerPrint = true)
         {
             var original = (uint[])answer;
             var cloned = (uint[])result;
@@ -34,8 +34,12 @@ namespace Cryptopals.Challenges.Set3
                 Console.WriteLine($"Result: {cloned}");
             }
 
+            var success = original.SequenceEqual(cloned);
+
             Console.WriteLine($"===== Challenge {_index} =====");
-            Console.WriteLine($"Challenge Passed: {original.SequenceEqual(cloned)}");
+            Console.WriteLine($"Challenge Passed: {success}");
+
+            return success;
         }
 
         #region Private Methods
