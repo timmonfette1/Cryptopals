@@ -124,6 +124,36 @@ namespace Cryptopals.DataContexts
 
         public string DecryptCBCManual(byte[] iv)
         {
+            var result = DecryptCBCManualAsBytes(iv);
+            return Encoding.ASCII.GetString(result.PKCS7Strip());
+        }
+
+        public byte[] DecryptCBCAsBytes(byte[] iv) => DecryptCBCManualAsBytes(iv);
+
+        public bool IsUsingECB()
+        {
+            var hashSet = new HashSet<byte[]>(new ByteArrayComparer());
+
+            for (int i = 0; i < _bytes.Length / 16; i++)
+            {
+                var chunk = _bytes.Skip(i * 16).Take(16).ToArray();
+                if (hashSet.Contains(chunk))
+                {
+                    return true;
+                }
+                else
+                {
+                    hashSet.Add(chunk);
+                }
+            }
+
+            return false;
+        }
+
+        #region Private Methods
+
+        private byte[] DecryptCBCManualAsBytes(byte[] iv)
+        {
             var result = new byte[_bytes.Length];
 
             using (var alg = Aes.Create())
@@ -152,27 +182,9 @@ namespace Cryptopals.DataContexts
                 }
             }
 
-            return Encoding.ASCII.GetString(result.PKCS7Strip());
+            return result;
         }
 
-        public bool IsUsingECB()
-        {
-            var hashSet = new HashSet<byte[]>(new ByteArrayComparer());
-
-            for (int i = 0; i < _bytes.Length / 16; i++)
-            {
-                var chunk = _bytes.Skip(i * 16).Take(16).ToArray();
-                if (hashSet.Contains(chunk))
-                {
-                    return true;
-                }
-                else
-                {
-                    hashSet.Add(chunk);
-                }
-            }
-
-            return false;
-        }
+        #endregion Private Methods
     }
 }

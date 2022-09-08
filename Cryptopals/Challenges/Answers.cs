@@ -20,7 +20,9 @@
         public const string CHALLENGE_14 = TwelveAndFourteen;
         public const string CHALLENGE_15 = "ICE ICE BABY";
         public const string CHALLENGE_16 = ";admin=true";
-        public const string CHALLENGE_17 = "";
+
+        // Challenge 17 has no pre-defined answer.
+
         public const string CHALLENGE_18 = "";
         public const string CHALLENGE_19 = "";
         public const string CHALLENGE_20 = "";

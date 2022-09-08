@@ -28,20 +28,30 @@
 
         public static byte[] PKCS7Strip(this byte[] source)
         {
-            if (source.Length == 0)
+            if (source.IsPKCS7Padded())
             {
-                return source;
-            }
-
-            byte last = source.Last();
-            if (last >= 1 && last <= 16 && source.Skip(source.Length - last).All(x => x == last))
-            {
-                return source.Take(source.Length - last).ToArray();
+                return source.Take(source.Length - source.Last()).ToArray();
             }
             else
             {
                 throw new ArgumentException("The provided Byte Array does not use PKCS7 Padding.", nameof(source));
             }
+        }
+
+        public static bool IsPKCS7Padded(this byte[] source)
+        {
+            if (source.Length == 0)
+            {
+                return true;
+            }
+
+            byte last = source.Last();
+            if (last >= 1 && last <= 16 && source.Skip(source.Length - last).All(x => x == last))
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
