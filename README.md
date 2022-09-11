@@ -4,7 +4,7 @@ This repository contains C# implementations of the [Cryptopals Challengs](https:
 
 ## Current Status
 
-Current status as of 09/07/2022: 20/66 Challenges Completed.
+Current status as of 09/10/2022: 21/66 Challenges Completed.
 
 ## Building and Executing
 
@@ -18,6 +18,6 @@ The challenges will execute and print their results to the console when you call
 
 If you'd like to view the answers to each challenge before doing them yourself, you can find them all loaded in a static class found in `Challenges/Answers.cs`.
 
-# Disclaimer
+## Disclaimer
 
 THIS CODE IS AN EXERCISE IN CRYPTOGRAPHY AND DOES NOT INDICATE CODE THAT IS PRODUCTION READY OR PRODUCTION SAFE. ANY USE OF THIS CODE IN A PRODUCTION PROJECT/SOLUTION IS DONE AT YOUR OWN RISK.

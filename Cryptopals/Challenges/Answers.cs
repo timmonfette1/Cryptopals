@@ -23,7 +23,7 @@
 
         // Challenge 17 has no pre-defined answer.
 
-        public const string CHALLENGE_18 = "";
+        public const string CHALLENGE_18 = "Yo, VIP Let's kick it Ice, Ice, baby Ice, Ice, baby ";
         public const string CHALLENGE_19 = "";
         public const string CHALLENGE_20 = "";
         public const string CHALLENGE_21 = "2357136044";
