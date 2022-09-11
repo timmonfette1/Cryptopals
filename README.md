@@ -1,6 +1,6 @@
 # Cryptopals
 
-This repository contains C# implementations of the [Cryptopals Challengs](https://cryptopals.com). This repository will be continually updated as I complete more of the Challenges.
+This repository contains C# implementations of the [Cryptopals Challenges](https://cryptopals.com). This repository will be continually updated as I complete more of the Challenges.
 
 ## Current Status
 
